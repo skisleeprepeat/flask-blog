@@ -10,21 +10,28 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 from functools import wraps
 from flask import abort
+# load environmental variables
+import os
+from dotenv import load_dotenv
 
+
+load_dotenv(".env")
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 
 ckeditor = CKEditor(app)
 Bootstrap(app)
 # gravatar object for commenter posts
 gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False, base_url=None)
 
-##CONNECT TO DB
+
+# CONNECT TO DB
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-##CONFIGURE DB TABLES
+
+# CONFIGURE DB TABLES
 
 # create the user table
 class User(UserMixin, db.Model):
