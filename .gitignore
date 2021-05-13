@@ -8,7 +8,6 @@ instance/*
 .webassets-cache
 .env
 /venv/
-config.py
 
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files
